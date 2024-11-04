@@ -24,28 +24,34 @@ export default function PokemonList(props) {
 			const params = new URLSearchParams(new URL(url).search);
 			setCurrentCall({
 				limit: params.get('limit'),
-				offset: params.get('offset')
-			})
-		}
+				offset: params.get('offset'),
+			});
+		};
 
 		// console.log(currentList);
 		console.log('List total pages: ', totalPages);
-		
+
 		if (!count > pageLength) {
 			return;
 		}
 		return (
-			<div className='grid grid-cols-[.75rem_1fr_.75rem] gap-4'>
+			<div className="grid grid-cols-[2rem_1fr_2rem] items-center gap-4">
 				{currentList.previous && (
-					<button onClick={() => handlePageChange(currentList.previous)}>
+					<button
+						onClick={() => handlePageChange(currentList.previous)}
+						className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full bg-white p-2 shadow hover:bg-stone-50"
+					>
 						<span>&lt;</span>
 					</button>
 				)}
-				<span className='col-start-2'>
-					{currentCall.offset/12 + 1} / {totalPages}
+				<span className="col-start-2">
+					{currentCall.offset / 12 + 1} / {totalPages}
 				</span>
 				{currentList.next && (
-					<button onClick={() => handlePageChange(currentList.next)}>
+					<button
+						onClick={() => handlePageChange(currentList.next)}
+						className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full bg-white p-2 shadow hover:bg-stone-50"
+					>
 						&gt;
 					</button>
 				)}
