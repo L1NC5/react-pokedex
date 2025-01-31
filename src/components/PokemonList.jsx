@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+
 import PokemonCard from 'src/components/PokemonCard';
 
+import { ChevronRight, ChevronLeft } from 'lucide-react';
 export default function PokemonList(props) {
 	const [currentCall, setCurrentCall] = useState({ limit: props.limit, offset: props.offset });
 	const [currentList, setCurrentList] = useState([]);
@@ -28,9 +31,6 @@ export default function PokemonList(props) {
 			});
 		};
 
-		// console.log(currentList);
-		console.log('List total pages: ', totalPages);
-
 		if (!count > pageLength) {
 			return;
 		}
@@ -41,7 +41,7 @@ export default function PokemonList(props) {
 						onClick={() => handlePageChange(currentList.previous)}
 						className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full bg-white p-2 shadow hover:bg-stone-50"
 					>
-						<span>&lt;</span>
+						<ChevronLeft />
 					</button>
 				)}
 				<span className="col-start-2">
@@ -52,7 +52,7 @@ export default function PokemonList(props) {
 						onClick={() => handlePageChange(currentList.next)}
 						className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full bg-white p-2 shadow hover:bg-stone-50"
 					>
-						&gt;
+						<ChevronRight />
 					</button>
 				)}
 			</div>
@@ -80,3 +80,8 @@ export default function PokemonList(props) {
 		</>
 	);
 }
+
+PokemonList.propTypes = {
+	limit: PropTypes.number.isRequired,
+	offset: PropTypes.number.isRequired,
+};
